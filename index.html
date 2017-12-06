@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Spinner</title>
+
+    <style media="screen">
+      .spinner {
+        background-image: url('spinner.svg');
+        height: 400px;
+        width: 400px;
+        background-size: cover;
+        display: block;
+        margin: 20px;
+      }
+      .marker {
+        height: 100px;
+        width: 10px;
+        background-color: black;
+        position: fixed;
+        top: 120px;
+        left: 223px;
+        transform-origin: bottom;
+        transition: transform 2s;
+      }
+      button {
+        padding: 40px;
+        background-image: linear-gradient(to right, #d35454, #ef9e4e, #f2cb4d, #8fb26b, #089fd6, #8f6ebf, #dd77b3);
+        border: 2px solid #aaa;
+        outline: none;
+        font-size: 3rem;
+        margin: 20px;
+        font-family: 'Inter UI', Roboto, sans-serif;
+        transition: all 0.5s;
+      }
+      button:hover {
+        border-color: #888
+      }
+      button:active, button.active {
+        transform: scale(0.9);
+      }
+    </style>
+    <script src="keymaster.js"></script>
+    <script>
+      key('space', () => {
+        document.querySelector('button').classList.add('active')
+        setTimeout(() => {
+          document.querySelector('button').classList.remove('active')
+        }, 200)
+        spin()
+      })
+
+      function spin() {
+        window.angle = (Math.floor(Math.random() * 360) + 1) + (window.spins * 360)
+        window.spins += 5
+        document.querySelector('.marker').style.transform = 'rotate(' + window.angle + 'deg)'
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        window.angle = 0
+        window.spins = 5
+        document.querySelector('button').addEventListener('click', spin)
+      })
+    </script>
+  </head>
+  <body>
+    <div class="spinner"></div>
+    <div class="marker"></div>
+    <button type="button" name="Spin">Spin</button>
+  </body>
+</html>
