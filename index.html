@@ -51,7 +51,7 @@
       })
 
       function spin() {
-        window.angle = (Math.random() * 360 + 1) + (5 * 360)
+        window.angle = (Math.random() * 3600 + 1)
         window.spins += 5
         document.querySelector('.marker').style.transform = 'rotate(' + window.angle + 'deg)'
       }
