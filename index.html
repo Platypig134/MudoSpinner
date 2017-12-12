@@ -39,7 +39,7 @@
       button:hover {
         border-color: #888
       }
-      button:active, button.active {
+      button.active {
         transform: scale(0.9);
       }
     </style>
@@ -70,6 +70,10 @@
         document.querySelector('button').addEventListener('click', () => {
           if (window.buttonTimeout) return
           window.buttonTimeout = true
+          document.querySelector('button').classList.add('active')
+          setTimeout(() => {
+            document.querySelector('button').classList.remove('active')
+          }, 200)
           spin()
           setTimeout(() => {
             window.buttonTimeout = false
