@@ -46,10 +46,15 @@
     <script src="keymaster.js"></script>
     <script>
       key('space', () => {
+        if (window.buttonTimeout) return
+        window.buttonTimeout = true
         document.querySelector('button').classList.add('active')
         setTimeout(() => {
           document.querySelector('button').classList.remove('active')
         }, 200)
+        setTimeout(() => {
+          window.buttonTimeout = false
+        }, 2000)
         spin()
       })
 
@@ -62,7 +67,14 @@
       document.addEventListener('DOMContentLoaded', () => {
         window.angle = 0
         window.spins = 5
-        document.querySelector('button').addEventListener('click', spin)
+        document.querySelector('button').addEventListener('click', () => {
+          if (window.buttonTimeout) return
+          window.buttonTimeout = true
+          spin()
+          setTimeout(() => {
+            window.buttonTimeout = false
+          }, 2000)
+        })
       })
     </script>
   </head>
